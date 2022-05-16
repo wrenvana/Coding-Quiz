@@ -1,4 +1,5 @@
 const question = $("#question")
+const possAnswer = $("#possAnswer")
 const possAnswer1 = $("#possAnswer1")
 const possAnswer2 = $("#possAnswer2")
 const possAnswer3 = $("#possAnswer3")
@@ -7,42 +8,43 @@ const timerEl = $('#quizTimer')
 const startBtn = $("#playBtn")
 const nextBtn = $("#nextBtn")
 let scoresList = $("#highScores")
+let score = 0
 
 var questionArray = [
   {
-    question: "xx1",
-    possAnswer1: "xxx",
-    possAnswer2: "xxx",
-    possAnswer3: "xxx",
-    possAnswer4: "xxx",
-    correctAnswer: "xxx",
+    question: "Question 1",
+    possAnswer1: "A",
+    possAnswer2: "B",
+    possAnswer3: "C",
+    possAnswer4: "D",
+    correctAnswer: "C",
   },
 
   {
-    question: "xx2",
-    possAnswer1: "xxx",
-    possAnswer2: "xxx",
-    possAnswer3: "xxx",
-    possAnswer4: "xxx",
-    correctAnswer: "xxx",
+    question: "Question 2",
+    possAnswer1: "A",
+    possAnswer2: "B",
+    possAnswer3: "C",
+    possAnswer4: "D",
+    correctAnswer: "D",
   },
 
   {
-    question: "xx3",
-    possAnswer1: "xxx",
-    possAnswer2: "xxx",
-    possAnswer3: "xxx",
-    possAnswer4: "xxx",
-    correctAnswer: "xxx",
+    question: "Question 3",
+    possAnswer1: "A",
+    possAnswer2: "B",
+    possAnswer3: "C",
+    possAnswer4: "D",
+    correctAnswer: "A",
   },
 
   {
-    question: "xx4",
-    possAnswer1: "xxx",
-    possAnswer2: "xxx",
-    possAnswer3: "xxx",
-    possAnswer4: "xxx",
-    correctAnswer: "xxx",
+    question: "Question 4",
+    possAnswer1: "A",
+    possAnswer2: "B",
+    possAnswer3: "C",
+    possAnswer4: "D",
+    correctAnswer: "D",
   },
 ]
 
@@ -58,13 +60,21 @@ function renderQuestion() {
   possAnswer4.text(questionArray[currentIndex].possAnswer4)
 }
 
+// Check answer
+function checkAnswer() {
+  if (possAnswer === correctAnswer) {
+    alert("Correct");
+    score += 1;
+  } else {
+    alert("Incorrect");
+    score -= 1;
+  }
+}
+
 // List high scores
 function renderHighScores() {
   var currentScores = JSON.parse(localStorage.getItem('highScores')) || []
   scoresList.empty();
-  if(scoresList.length === 0) {
-    return scoresList.text("None Yet - Try the Quiz!")
-  }
   for (let i = 0; i < currentScores.length; i++) {
     const scoreObj = currentScores[i];
     var newLi = $("<li>", {
@@ -82,7 +92,7 @@ nextBtn.on("click", nextQuestion)
 
 // Start quiz
 function startQuiz() {
-  timer = 5;
+  timer = 60;
   score = 0;
   renderQuestion();
   var gameTimer = setInterval(() => {
