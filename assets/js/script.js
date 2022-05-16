@@ -1,27 +1,56 @@
-var timer; 
-var timeLeft = 60; // seconds
+const question = $("#question")
+const possAnswer = $("#possAnswer")
+const timerEl = $('#quizTimer')
+const startBtn = $("#playBtn")
+let scoresList = $("#highScores")
 
-document.getElementById("#playBtn").addEventListener("click", start);
+var questionArray = [
+  {
+    question: xxx,
+    possAnswer: xxx, xxx, xxx, xxx,
+    correctAnswer: xxx,
+  },
 
-// end game when timer runs out
-function gameOver() {
-cancelInterval(timer);
+  {
+    question: xxx,
+    possAnswer: xxx, xxx, xxx, xxx,
+    correctAnswer: xxx,
+  },
 
-  // re-show the button, so they can start it again
-$('#playBtn').show();
+  {
+    question: xxx,
+    possAnswer: xxx, xxx, xxx, xxx,
+    correctAnswer: xxx,
+  },
+
+  {
+    question: xxx,
+    possAnswer: xxx, xxx, xxx, xxx,
+    correctAnswer: xxx,
+  },
+]
+
+let timer = 5;
+let currentIndex = 0;
+
+function renderQuestion() {
+  question.text(questionArray[currentIndex].question),
+  possAnswer.text(questionArray[currentIndex].possAnswer)
 }
 
-function updateTimer() {
-timeLeft = timeLeft - 1;
-if(timeLeft >= 0)
-    $('#timer').html(timeLeft);
-else {
-    gameOver();
-}
-}
-
-// start game
-function start() {
-// call function every 60 seconds
-timer = setInterval(updateTimer, 1000);
+function renderHighScores() {
+  var currentScores = JSON.parse(localStorage.getItem('highScores')) || []
+  scoresList.empty();
+  if(scoresList.length === 0) {
+    return scoresList.text("None Yet - Try the Quiz!")
+  }
+  for (let i = 0; i < currentScores.length; i++) {
+    const scoreObj = currentScores[i];
+    var newLi = $("<li>", {
+      class: "list-group-item"
+    })
+    .text(scoreObj.initials + '___________' + scoreObj.score)
+    scoresList.append(newLi)
+  }
+  
 }
