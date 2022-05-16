@@ -1,5 +1,8 @@
 const question = $("#question")
-const possAnswer = $("#possAnswer")
+const possAnswer1 = $("#possAnswer1")
+const possAnswer2 = $("#possAnswer2")
+const possAnswer3 = $("#possAnswer3")
+const possAnswer4 = $("#possAnswer4")
 const timerEl = $('#quizTimer')
 const startBtn = $("#playBtn")
 const nextBtn = $("#nextBtn")
@@ -7,27 +10,39 @@ let scoresList = $("#highScores")
 
 var questionArray = [
   {
-    question: xx1,
-    possAnswer: xxx, xxx, xxx, xxx,
-    correctAnswer: xxx,
+    question: "xx1",
+    possAnswer1: "xxx",
+    possAnswer2: "xxx",
+    possAnswer3: "xxx",
+    possAnswer4: "xxx",
+    correctAnswer: "xxx",
   },
 
   {
-    question: xx2,
-    possAnswer: xxx, xxx, xxx, xxx,
-    correctAnswer: xxx,
+    question: "xx2",
+    possAnswer1: "xxx",
+    possAnswer2: "xxx",
+    possAnswer3: "xxx",
+    possAnswer4: "xxx",
+    correctAnswer: "xxx",
   },
 
   {
-    question: xx3,
-    possAnswer: xxx, xxx, xxx, xxx,
-    correctAnswer: xxx,
+    question: "xx3",
+    possAnswer1: "xxx",
+    possAnswer2: "xxx",
+    possAnswer3: "xxx",
+    possAnswer4: "xxx",
+    correctAnswer: "xxx",
   },
 
   {
-    question: xx4,
-    possAnswer: xxx, xxx, xxx, xxx,
-    correctAnswer: xxx,
+    question: "xx4",
+    possAnswer1: "xxx",
+    possAnswer2: "xxx",
+    possAnswer3: "xxx",
+    possAnswer4: "xxx",
+    correctAnswer: "xxx",
   },
 ]
 
@@ -37,7 +52,10 @@ let currentIndex = 0;
 // Show question
 function renderQuestion() {
   question.text(questionArray[currentIndex].question),
-  possAnswer.text(questionArray[currentIndex].possAnswer)
+  possAnswer1.text(questionArray[currentIndex].possAnswer1)
+  possAnswer2.text(questionArray[currentIndex].possAnswer2)
+  possAnswer3.text(questionArray[currentIndex].possAnswer3)
+  possAnswer4.text(questionArray[currentIndex].possAnswer4)
 }
 
 // List high scores
@@ -72,7 +90,7 @@ function startQuiz() {
       clearInterval(quizTimer)
       endQuiz()
     }
-    timerText.text(timer)
+    timerEl.text(timer)
     timer--
   }, 1000);
 }
@@ -86,7 +104,7 @@ function nextQuestion() {
 
 // End quiz and display scores
 function endQuiz() {
-  var userInitials = prompt("Your score is" + score + "." + "\nPlease enter your initials.")
+  var userInitials = prompt("Your score is " + score + "." + "\nPlease enter your initials.")
   var userObj = {
     initials,
     score
